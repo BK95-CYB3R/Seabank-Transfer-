@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeaBank Precision - By.MR DUBAI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        :root {
+            --cyber-pink: #ff00ff;
+            --cyber-blue: #00ffff;
+            --dark-bg: #0a0a0a;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--dark-bg);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 50px;
+        }
+
+        /* --- HEADER RUNNING TEXT --- */
+        .header-warn {
+            width: 100%;
+            background: #ff0055;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 2px 10px rgba(255, 0, 85, 0.5);
+        }
+
+        /* --- STRUK AREA (1:1) --- */
+        #capture-area {
+            background-color: #ffffff;
+            width: 500px; 
+            height: 500px; 
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .header-title { position: absolute; top: 25px; left: 25px; font-size: 28px; font-weight: 700; color: #1a1a1a; letter-spacing: -0.5px; }
+        .content-bg { position: absolute; top: 78px; left: 0; width: 100%; height: 422px; background-color: #f7f8f9; z-index: 0; }
+        
+        .status-section { position: absolute; top: 90px; width: 100%; text-align: center; z-index: 1; }
+        .check-icon { width: 95px; height: 95px; margin-bottom: 12px; }
+        .status-msg { color: #7d7d7d; font-size: 19px; font-weight: 400; margin-bottom: 5px; }
+        .amount-display { font-size: 48px; font-weight: 700; color: #000; display: flex; justify-content: center; align-items: baseline; gap: 8px; }
+        
+        .white-card { 
+            position: absolute; top: 285px; left: 20px; right: 20px; 
+            background: #ffffff; border-radius: 14px; padding: 22px 24px; 
+            z-index: 2; box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+        }
+
+        .info-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+        .label { font-size: 16px; color: #909090; }
+        .val-group { text-align: right; display: flex; flex-direction: column; align-items: flex-end; }
+        .user-header { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 17px; color: #1c1c1c; }
+        
+        .p-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #eee; }
+        
+        /* Penyesuaian Logo SeaBank */
+        .seabank-row {
+            display: flex; 
+            align-items: center; 
+            gap: 5px;
+            font-size: 14px; 
+            color: #7d7d7d;
+            margin-top: 5px; /* Diturunkan sedikit */
+        }
+        .bank-logo-sm { width: 18px; height: 18px; }
+        
+        .dana-logo-sm { width: 38px; height: 38px; margin-right: -2px; }
+
+        .line-dot { height: 1px; background: #f0f0f0; margin: 15px 0; }
+        .total-row { display: flex; justify-content: space-between; font-weight: 700; font-size: 17px; }
+
+        /* --- HACKER PANEL --- */
+        .panel-editor {
+            margin-top: 30px;
+            background: rgba(15, 15, 25, 0.95);
+            padding: 25px;
+            border-radius: 20px;
+            width: 450px;
+            border: 2px solid var(--cyber-pink);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+        }
+
+        .panel-editor h2 { color: var(--cyber-blue); font-family: 'Orbitron'; font-size: 14px; text-align: center; margin-bottom: 20px; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; font-size: 10px; color: var(--cyber-pink); margin-bottom: 5px; font-family: 'Orbitron'; }
+        .input-style { width: 100%; padding: 10px; background: #000; border: 1px solid #444; color: #fff; border-radius: 8px; box-sizing: border-box; }
+        
+        .btn-inject { 
+            width: 100%; padding: 15px; background: var(--cyber-pink); color: white; 
+            border: none; border-radius: 10px; font-family: 'Orbitron'; font-weight: 700; 
+            cursor: pointer; text-transform: uppercase; margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header-warn">JANGAN DI SEBAR (BY.MR DUBAI)</div>
+
+<div id="capture-area">
+    <div class="header-title">Hasil Transfer</div>
+    <div class="content-bg"></div>
+
+    <div class="status-section">
+        <img src="centang.png" class="check-icon">
+        <div class="status-msg">Pembayaran Diterima</div>
+        <div class="amount-display">
+            <span style="font-size: 24px;">Rp</span> <span id="v-nom">15.000.000</span>
+        </div>
+    </div>
+
+    <div class="white-card">
+        <div class="info-row">
+            <div class="label">Dari</div>
+            <div class="val-group">
+                <div class="user-header">
+                    <img src="" id="v-ava" class="p-avatar">
+                    <span id="v-dari">By.MR DUBAI</span>
+                </div>
+                <div class="seabank-row">
+                    <img src="seabank.png" class="bank-logo-sm"> SeaBank: ●●●●●●
+                </div>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <div class="label">Ke</div>
+            <div class="val-group">
+                <div class="user-header">
+                    <img src="dana.png" class="dana-logo-sm">
+                    <span>Dnid <span id="v-i1">Usw</span>xxxx <span id="v-i2">Kha</span>xxxx</span>
+                </div>
+                <div style="font-size: 14px; color: #7d7d7d; margin-top: 2px;">Dana: ●●●●●●</div>
+            </div>
+        </div>
+
+        <div class="line-dot"></div>
+
+        <div class="total-row">
+            <span style="font-weight: 500;">Jumlah Transfer</span>
+            <span id="v-total">Rp 15.000.000</span>
+        </div>
+    </div>
+</div>
+
+<div class="panel-editor">
+    <h2>HACKER PANEL (BY.MR DUBAI)</h2>
+    <div class="input-group">
+        <label>NOMINAL (RUPIAH)</label>
+        <input type="number" id="in-nom" class="input-style" value="15000000" oninput="runSync()">
+    </div>
+    <div class="input-group">
+        <label>NAMA PENGIRIM</label>
+        <input type="text" id="in-dari" class="input-style" value="By.MR DUBAI" oninput="runSync()">
+    </div>
+    <div class="input-group">
+        <label>FOTO PENGIRIM</label>
+        <input type="file" class="input-style" accept="image/*" onchange="upImg(this)">
+    </div>
+    <div style="display:flex; gap:10px;">
+        <div class="input-group" style="flex:1">
+            <label>INISIAL 1</label>
+            <input type="text" id="in-i1" class="input-style" value="Usw" oninput="runSync()">
+        </div>
+        <div class="input-group" style="flex:1">
+            <label>INISIAL 2</label>
+            <input type="text" id="in-i2" class="input-style" value="Kha" oninput="runSync()">
+        </div>
+    </div>
+    <button class="btn-inject" onclick="download()">Inject Data & Download (1:1)</button>
+</div>
+
+<script>
+    function formatIDR(n) {
+        return new Intl.NumberFormat('id-ID').format(n);
+    }
+
+    function runSync() {
+        const n = document.getElementById('in-nom').value;
+        const fmt = formatIDR(n);
+        document.getElementById('v-nom').innerText = fmt;
+        document.getElementById('v-total').innerText = 'Rp ' + fmt;
+        document.getElementById('v-dari').innerText = document.getElementById('in-dari').value;
+        document.getElementById('v-i1').innerText = document.getElementById('in-i1').value;
+        document.getElementById('v-i2').innerText = document.getElementById('in-i2').value;
+    }
+
+    function upImg(input) {
+        if (input.files && input.files[0]) {
+            let r = new FileReader();
+            r.onload = function(e) { document.getElementById('v-ava').src = e.target.result; }
+            r.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function download() {
+        const area = document.getElementById('capture-area');
+        html2canvas(area, { scale: 3 }).then(canvas => {
+            const link = document.createElement('a');
+            link.download = 'SeaBank_Success.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    }
+</script>
+
+</body>
+</html>
